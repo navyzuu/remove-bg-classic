@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover & Image Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Background Remover & Image Editor</h1>
+            <p>Upload foto, hapus background, resize, dan download hasilnya!</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Klik atau drag & drop gambar di sini</p>
+                        <span class="file-info">PNG, JPG, WEBP hingga 10MB</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Key Section -->
+            <section class="api-key-section">
+                <label for="apiKeyInput">
+                    <span>🔑 Remove.bg API Key (opsional - untuk hasil lebih baik)</span>
+                    <a href="https://www.remove.bg/api" target="_blank" class="api-link">Dapatkan API Key</a>
+                </label>
+                <input type="password" id="apiKeyInput" placeholder="Masukkan API key Anda (kosongkan untuk mode gratis)">
+                <small>Mode gratis menggunakan teknik dasar. API key memberikan hasil lebih akurat.</small>
+            </section>
+
+            <!-- Controls Section -->
+            <section class="controls-section" id="controlsSection" style="display: none;">
+                <div class="control-group">
+                    <button id="removeBgBtn" class="btn btn-primary">
+                        <span>✨ Hapus Background</span>
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        <span>🔄 Reset</span>
+                    </button>
+                </div>
+
+                <div class="resize-controls">
+                    <h3>Resize / Rescale</h3>
+                    <div class="resize-options">
+                        <div class="resize-input-group">
+                            <label>Width (px):</label>
+                            <input type="number" id="widthInput" min="1" placeholder="Auto">
+                        </div>
+                        <div class="resize-input-group">
+                            <label>Height (px):</label>
+                            <input type="number" id="heightInput" min="1" placeholder="Auto">
+                        </div>
+                        <div class="resize-input-group">
+                            <label>
+                                <input type="checkbox" id="maintainAspect" checked>
+                                Maintain Aspect Ratio
+                            </label>
+                        </div>
+                        <button id="resizeBtn" class="btn btn-secondary">
+                            <span>📐 Apply Resize</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section" id="previewSection" style="display: none;">
+                <div class="preview-container">
+                    <div class="preview-box">
+                        <h3>Original</h3>
+                        <canvas id="originalCanvas"></canvas>
+                    </div>
+                    <div class="preview-box">
+                        <h3>Hasil</h3>
+                        <canvas id="resultCanvas"></canvas>
+                    </div>
+                </div>
+                <div class="download-section">
+                    <button id="downloadBtn" class="btn btn-success">
+                        <span>💾 Download Hasil</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                <div class="spinner"></div>
+                <p>Memproses gambar...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
